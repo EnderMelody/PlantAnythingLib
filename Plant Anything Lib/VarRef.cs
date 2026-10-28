@@ -3,9 +3,9 @@ using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Server;
 
-namespace PlantAnythingAPI
+namespace PlantAnythingLib
 {
-    internal class PAA_VarRef
+    internal class VarRef
     {
         internal const string ModName = "PlantAnythingLib";
         internal const string ModName_Trunc = "PAL";
