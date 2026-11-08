@@ -111,10 +111,10 @@ namespace PlantAnythingLib.handler
 
                     byEntity.World.PlaySoundAt(new AssetLocation("game:sounds/block/plant"), abvBlockPos, 0.4375, player);
                     ((byEntity as EntityPlayer)?.Player as IClientPlayer)?.TriggerFpAnimation(EnumHandInteract.HeldItemInteract); //whats the point of this animation, it looks exactly the same with or without
-                    if (serverPlayer is null || serverPlayer.WorldData?.CurrentGameMode != EnumGameMode.Creative)
+                    if (serverPlayer is null) { Function_General.Log_Error("Recived null player on server side. Behavior will function but seeds will not be consumed. Please report this error."); }
+                    if (player is null || serverPlayer.WorldData?.CurrentGameMode != EnumGameMode.Creative)
                     {
-                        ItemSlot serverSlot = serverPlayer!.InventoryManager.ActiveHotbarSlot; //for some reason i have to do this to get the server to TakeOut() instead of the client despite VS using the normal slot that is passed through... if anyone knows why id appreciate it.
-
+                        ItemSlot serverSlot = serverPlayer.InventoryManager.GetInventory(slot.Inventory.InventoryID)[slot.Inventory.GetSlotId(slot)];
                         serverSlot.TakeOut(1);
                         serverSlot.MarkDirty();
                     }
